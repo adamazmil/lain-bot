@@ -123,8 +123,9 @@ class Commands:
 		await ctx.send(embed=embed)
 
 	@al.command(pass_context=True)
-	async def register(ctx):
-		await ctx.send("DM Sent!")
+	async def reg(ctx, aniUser): # sends a DM to the user to register their AniList account
+		userID = ctx.message.author.id
+		aniReg(user, aniUser)
 
 	@bot.command(pass_context=True)
 	async def botChannel(ctx):

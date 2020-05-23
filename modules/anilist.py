@@ -55,3 +55,12 @@ class Anilist(graphene.ObjectType):
 		else:
 			print('Response code: ' + str(response.status_code) + '\n\n' + str(result))
 			return None
+
+	def aniReg(user, aniUser): # WIP - To properly integrate this portion use the AniList API to save user-related information to the JSON file under their Discord user ID
+		with open("./anilist/"+serverID+".json", 'r') as server_json:
+			json_data = json.load(server_json)
+			# changes the line to update in the json
+			json_data[user] = aniUser
+		# writes the changes to the json file
+		with open("./anilist/"+serverID+".json", 'w') as server_json:
+			server_json.write(json.dumps(json_data))
