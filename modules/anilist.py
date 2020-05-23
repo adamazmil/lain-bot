@@ -39,20 +39,19 @@ class Anilist(graphene.ObjectType):
 	        }
 		}
 		'''
-		
+
 		variables = {
 		    'search': show,
 		    'asHtml': False
 		}
-			
+
 		source = 'https://graphql.anilist.co'
-		
+
 		response = requests.post(source, json={'query': query, 'variables': variables})
 		result = response.json();
-		
+
 		if response.status_code == 200:
 			return result
 		else:
 			print('Response code: ' + str(response.status_code) + '\n\n' + str(result))
 			return None
-

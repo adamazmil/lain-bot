@@ -43,9 +43,15 @@ class Commands:
 	async def serverID(ctx): #returns the serverID, mainly for debug purposes
 		await ctx.send('Server ID: '+str(Client.serverID))
 
-	@bot.command(pass_context=True)
-	async def anilist(ctx):
-		show = str(ctx.message.content)[(len(ctx.prefix) + len('anilist ')):]
+	@bot.group()
+	async def al(ctx): # anilist command group
+
+		if ctx.invoked_subcommand is None:
+			await ctx.send('Invalid anilist command passed...')
+
+	@al.command(pass_context=True)
+	async def search(ctx):
+		show = str(ctx.message.content)[(len(ctx.prefix) + len('al search ')):]
 		# retrieve json file
 		anilistResults = Anilist.aniSearch(show)
 
@@ -115,6 +121,10 @@ class Commands:
 				embed.add_field(name='Aired', value=tyme, inline=True)
 
 		await ctx.send(embed=embed)
+
+	@al.command(pass_context=True)
+	async def register(ctx):
+		await ctx.send("DM Sent!")
 
 	@bot.command(pass_context=True)
 	async def botChannel(ctx):
